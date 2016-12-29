@@ -104,6 +104,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         raindrop.physicsBody = SKPhysicsBody(texture: raindropTexture, size: raindrop.size)
         raindrop.physicsBody?.categoryBitMask = RainDropCategory
         raindrop.physicsBody?.contactTestBitMask = FloorCategory | WorldCategory
+        raindrop.zPosition = 2
         
         addChild(raindrop)
     }
