@@ -15,6 +15,7 @@
 		BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */; };
 		D649083D1E15813800B90F97 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D649083C1E15813800B90F97 /* BackgroundNode.swift */; };
 		D649083F1E15893F00B90F97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D649083E1E15893F00B90F97 /* Constants.swift */; };
+		D64908411E158FCC00B90F97 /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D64908401E158FCC00B90F97 /* UmbrellaSprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		BBA2E4B71D74A62C00853E63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D649083C1E15813800B90F97 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
 		D649083E1E15893F00B90F97 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D64908401E158FCC00B90F97 /* UmbrellaSprite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UmbrellaSprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				D649083C1E15813800B90F97 /* BackgroundNode.swift */,
+				D64908401E158FCC00B90F97 /* UmbrellaSprite.swift */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D64908411E158FCC00B90F97 /* UmbrellaSprite.swift in Sources */,
 				D649083F1E15893F00B90F97 /* Constants.swift in Sources */,
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
 				D649083D1E15813800B90F97 /* BackgroundNode.swift in Sources */,

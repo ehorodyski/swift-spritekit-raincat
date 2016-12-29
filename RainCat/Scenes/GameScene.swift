@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var currentRainDropSpawnTime : TimeInterval = 0
     private var rainDropSpawnRate : TimeInterval = 0.5
     private let backgroundNode = BackgroundNode()
+    private let umbrellaNode = UmbrellaSprite.newInstance()
 
     // Public Variables
     public let raindropTexture = SKTexture(imageNamed: "rain_drop")
@@ -31,10 +32,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         self.physicsBody = SKPhysicsBody(edgeLoopFrom: worldFrame)
         self.physicsBody?.categoryBitMask = WorldCategory
+        
         self.lastUpdateTime = 0
         self.backgroundNode.setup(size: size)
         
+        umbrellaNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        umbrellaNode.zPosition = 4
+        
         addChild(backgroundNode)
+        addChild(umbrellaNode)
     }
 
 
