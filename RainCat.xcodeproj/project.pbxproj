@@ -13,6 +13,8 @@
 		BBA2E4B11D74A62C00853E63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4AF1D74A62C00853E63 /* Main.storyboard */; };
 		BBA2E4B31D74A62C00853E63 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B21D74A62C00853E63 /* Assets.xcassets */; };
 		BBA2E4B61D74A62C00853E63 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */; };
+		D649083D1E15813800B90F97 /* BackgroundNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D649083C1E15813800B90F97 /* BackgroundNode.swift */; };
+		D649083F1E15893F00B90F97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D649083E1E15893F00B90F97 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		BBA2E4B21D74A62C00853E63 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BBA2E4B51D74A62C00853E63 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BBA2E4B71D74A62C00853E63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D649083C1E15813800B90F97 /* BackgroundNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNode.swift; sourceTree = "<group>"; };
+		D649083E1E15893F00B90F97 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 				BBA2E4B21D74A62C00853E63 /* Assets.xcassets */,
 				BBA2E4B41D74A62C00853E63 /* LaunchScreen.storyboard */,
 				BBA2E4B71D74A62C00853E63 /* Info.plist */,
+				D649083E1E15893F00B90F97 /* Constants.swift */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 		BBE2D58D1D9AB93B0046B493 /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				D649083C1E15813800B90F97 /* BackgroundNode.swift */,
 			);
 			name = Sprites;
 			sourceTree = "<group>";
@@ -126,7 +132,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Thirteen23;
 				TargetAttributes = {
 					BBA2E4A11D74A62C00853E63 = {
@@ -172,7 +178,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D649083F1E15893F00B90F97 /* Constants.swift in Sources */,
 				BBA2E4AC1D74A62C00853E63 /* GameScene.swift in Sources */,
+				D649083D1E15813800B90F97 /* BackgroundNode.swift in Sources */,
 				BBA2E4AE1D74A62C00853E63 /* GameViewController.swift in Sources */,
 				BBA2E4A61D74A62C00853E63 /* AppDelegate.swift in Sources */,
 			);
@@ -218,6 +226,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -268,6 +277,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
