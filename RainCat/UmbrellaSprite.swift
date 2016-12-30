@@ -10,6 +10,11 @@ import SpriteKit
 
 public class UmbrellaSprite : SKSpriteNode {
 
+    // Private Variables
+    private var destination: CGPoint!
+    private let easing: CGFloat = 0.1
+    
+    // Static Functions
     public static func newInstance() -> UmbrellaSprite {
         let umbrella = UmbrellaSprite(imageNamed: "umbrella")
         let path = UIBezierPath()
@@ -24,6 +29,30 @@ public class UmbrellaSprite : SKSpriteNode {
         umbrella.physicsBody?.restitution = 0.9
         
         return umbrella
+    }
+    
+    // Public Methods
+    public func updatePosition(point: CGPoint) {
+        position = point
+        destination = point
+    }
+    
+    public func setDestination(destination: CGPoint) {
+        self.destination = destination
+    }
+    
+    public func update(deltaTime: TimeInterval) {
+        let distance = sqrt(pow((destination.x - position.x), 2) + pow((destination.y - position.y), 2))
+        
+        if(distance > 1) {
+            let directionX = (destination.x - position.x)
+            let directionY = (destination.y - position.y)
+            
+            position.x += directionX * easing
+            position.y += directionY * easing
+        } else {
+            position = destination
+        }
     }
 
 }

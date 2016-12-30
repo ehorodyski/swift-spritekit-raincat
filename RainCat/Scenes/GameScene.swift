@@ -36,7 +36,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.lastUpdateTime = 0
         self.backgroundNode.setup(size: size)
         
-        umbrellaNode.position = CGPoint(x: frame.midX, y: frame.midY)
+        umbrellaNode.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
         umbrellaNode.zPosition = 4
         
         addChild(backgroundNode)
@@ -45,11 +45,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchPoint = touches.first?.location(in: self)
         
+        if let point = touchPoint {
+            umbrellaNode.setDestination(destination: point)
+        }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-
+        let touchPoint = touches.first?.location(in: self)
+        
+        if let point = touchPoint {
+            umbrellaNode.setDestination(destination: point)
+        }
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -73,6 +81,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         self.lastUpdateTime = currentTime
+        umbrellaNode.update(deltaTime: dt)
     }
     
     // Public Methods
