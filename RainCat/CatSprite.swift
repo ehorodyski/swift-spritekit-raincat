@@ -13,12 +13,16 @@ public class CatSprite: SKSpriteNode {
     // Constants
     private let MOVEMENT_SPEED: CGFloat = 100
     private let MAX_FLAIL_TIME: TimeInterval = 2
+    private let MAX_RAIN_HITS = 4
     private let ROTATE_ACTION_KEY = "action_rotate"
     private let WALKING_ACTION_KEY = "action_walking"
+    private let SOUND_EFFECT_ACTION_KEY = "action_sound_effect"
     private let WALKING_FRAMES = [SKTexture(imageNamed: "cat_one"), SKTexture(imageNamed: "cat_two")]
+    private let MEOW_SFX = ["cat_meow_1.mp3", "cat_meow_2.mp3", "cat_meow_3.mp3", "cat_meow_4.mp3", "cat_meow_5.wav", "cat_meow_6.wav"]
     
     // Private Variables
     private var timeSinceLastHit: TimeInterval = 2
+    private var currentRainHits = 4
     
     // Static Functions
     public static func newInstance() -> CatSprite {
@@ -71,7 +75,22 @@ public class CatSprite: SKSpriteNode {
     }
     
     public func hitByRain() {
+        
         self.timeSinceLastHit = 0
         removeAction(forKey: WALKING_ACTION_KEY)
+
+        if (self.currentRainHits < MAX_RAIN_HITS) {
+            self.currentRainHits += 1
+            return
+        }
+        
+        if(action(forKey: SOUND_EFFECT_ACTION_KEY) == nil) {
+            self.currentRainHits = 0
+            let selectedSFX = Int(arc4random_uniform(UInt32(MEOW_SFX.count)))
+            run(SKAction.playSoundFileNamed(MEOW_SFX[selectedSFX], waitForCompletion: true), withKey: SOUND_EFFECT_ACTION_KEY)
+        }
+        
+        
+
     }
 }
