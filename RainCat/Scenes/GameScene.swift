@@ -12,11 +12,14 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
 
     // Private Variables
-    private var lastUpdateTime : TimeInterval = 0
-    private var currentRainDropSpawnTime : TimeInterval = 0
-    private var rainDropSpawnRate : TimeInterval = 0.5
+    private var lastUpdateTime: TimeInterval = 0
+    private var currentRainDropSpawnTime: TimeInterval = 0
+    private var rainDropSpawnRate: TimeInterval = 0.5
+    private var foodEdgeMargin: CGFloat = 75.0
     private let backgroundNode = BackgroundNode()
     private let umbrellaNode = UmbrellaSprite.newInstance()
+    private var catNode: CatSprite!
+    private var foodNode: FoodSprite!
 
     // Public Variables
     public let raindropTexture = SKTexture(imageNamed: "rain_drop")
@@ -41,6 +44,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(backgroundNode)
         addChild(umbrellaNode)
+        
+        spawnCat()
+        spawnFood()
     }
 
 
@@ -82,6 +88,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.lastUpdateTime = currentTime
         umbrellaNode.update(deltaTime: dt)
+        catNode.update(deltaTime: dt, foodLocation: foodNode.position)
     }
     
     // Public Methods
@@ -94,6 +101,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if(contact.bodyB.categoryBitMask == RainDropCategory) {
             contact.bodyB.node?.physicsBody?.collisionBitMask = 0
             contact.bodyB.node?.physicsBody?.categoryBitMask = 0
+        }
+        
+        // Handle Cat contact
+        if(contact.bodyA.categoryBitMask == CatCategory || contact.bodyB.categoryBitMask == CatCategory) {
+            handleCatCollision(contact: contact)
+            return
+        }
+        
+        // Handle Food contact
+        if(contact.bodyA.categoryBitMask == FoodCategory || contact.bodyB.categoryBitMask == FoodCategory) {
+            handleFoodHit(contact: contact)
+            return
         }
         
         // Remove the raindrop from memory
@@ -119,9 +138,91 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         raindrop.physicsBody = SKPhysicsBody(texture: raindropTexture, size: raindrop.size)
         raindrop.physicsBody?.categoryBitMask = RainDropCategory
         raindrop.physicsBody?.contactTestBitMask = FloorCategory | WorldCategory
+        raindrop.physicsBody?.density = 0.5
         raindrop.zPosition = 2
         
         addChild(raindrop)
+    }
+    
+    private func spawnCat() {
+        
+        // If cat node is already initialized, remove it.
+        if let currentCat = catNode, children.contains(currentCat) {
+            catNode.removeFromParent()
+            catNode.removeAllActions()
+            catNode.physicsBody = nil
+        }
+        
+        // Spawn the cat node.
+        catNode = CatSprite.newInstance()
+        catNode.position = CGPoint(x: umbrellaNode.position.x, y: umbrellaNode.position.y - 30)
+        
+        addChild(catNode)
+    }
+    
+    private func spawnFood() {
+        
+        // If food is already initialized, remove it.
+        if let currentFood = foodNode, children.contains(currentFood) {
+            foodNode.removeFromParent()
+            foodNode.removeAllActions()
+            foodNode.physicsBody = nil
+        }
+        
+        foodNode = FoodSprite.newInstance()
+        
+        var randomPosition: CGFloat = CGFloat(arc4random())
+        randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2)
+        randomPosition += foodEdgeMargin
+        
+        foodNode.position = CGPoint(x: randomPosition, y: size.height)
+        
+        addChild(foodNode)
+    }
+    
+    private func handleCatCollision(contact: SKPhysicsContact) {
+        var otherBody: SKPhysicsBody
+        
+        if (contact.bodyA.categoryBitMask == CatCategory) {
+            otherBody = contact.bodyB
+        } else {
+            otherBody = contact.bodyA
+        }
+        
+        switch otherBody.categoryBitMask {
+        case RainDropCategory:
+            catNode.hitByRain()
+        case WorldCategory:
+            spawnCat()
+        default:
+            print("Something hit the cat")
+        }
+    }
+    
+    private func handleFoodHit(contact: SKPhysicsContact) {
+        var otherBody: SKPhysicsBody
+        var foodBody: SKPhysicsBody
+        
+        if(contact.bodyA.categoryBitMask == FoodCategory) {
+            otherBody = contact.bodyB
+            foodBody = contact.bodyA
+        } else {
+            otherBody = contact.bodyA
+            foodBody = contact.bodyB
+        }
+        
+        switch otherBody.categoryBitMask {
+        case CatCategory:
+            // TODO: Increment Points
+            print("Fed cat")
+            fallthrough
+        case WorldCategory:
+            foodBody.node?.removeFromParent()
+            foodBody.node?.physicsBody = nil
+            spawnFood()
+        default:
+            print("Something else touched the food")
+        }
     }
     
 }
